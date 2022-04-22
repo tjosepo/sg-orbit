@@ -5,6 +5,7 @@ import { InfoIcon, LightbulbIcon } from "@components/icons";
 import { Inline } from "@components/layout";
 import { InnerSwitch, Switch } from "@components/switch";
 import { Text } from "@components/typography";
+import { Tooltip, TooltipTrigger } from "@components/tooltip";
 
 <Meta
     title="Components/Switch"
@@ -13,7 +14,7 @@ import { Text } from "@components/typography";
 
 # Switch
 
-<Tagline>A switch offers an on or off choice to a user.</Tagline>
+<Tagline>A switch offers an immediate activate or deactivate choice to a user.</Tagline>
 
 <ComponentInfo
     usage={"import { Switch } from \"@sharegate/orbit-ui\";"}
@@ -21,11 +22,27 @@ import { Text } from "@components/typography";
     githubPath="/packages/components/src/switch/src"
 />
 
+## Best practices
+
+- Use to trigger an immediate action such as an activation/deactivation.
+
+## Accessibility
+
+- Text should be short and descriptive.
+- Text should be descriptive and complete enough to be understood without relying on an icon. Using an icon to carry information will render it non-accessible.
+- Do not change the label based on the state of the switch. The label should represent the "on/checked" state of the switch.
+
+## Related components
+
+- If the objective is to select elements from a list, the [checkbox](?path=/docs/checkbox--default-story) or the [radio button]() should be used instead.
+- To provide contextual help, use a [tooltip](?path=/docs/tooltip--default-story).
+- To trigger an action, use a [button](?path=/docs/button--default-story).
+
 ## Usage
 
 ### Default
 
-A default switch.
+A switch can be either checked or unchecked and should always show the current state of the object.
 
 <Preview>
     <Story name="default">
@@ -45,7 +62,7 @@ A switch can be checked.
 
 ### No label
 
-A switch can be rendered without a label.
+A switch can be rendered without a label. When rendered without a label a title should be close to the switch making it clear what happens when the toggle is turned on and off.
 
 <Preview>
     <Story name="no label">
@@ -55,7 +72,7 @@ A switch can be rendered without a label.
 
 ### Disabled
 
-A switch can be disabled.
+A switch can be disabled. A disabled switch should continue to display it's current state(checked or unchecked).
 
 <Preview>
     <Story name="disabled">
@@ -65,7 +82,7 @@ A switch can be disabled.
 
 ### Icon
 
-A switch can have [icons](?path=/docs/icon-gallery--page) after his text.
+A switch can have an [icon](?path=/docs/icon-gallery--page) after its text.
 
 <Preview>
     <Story name="icon">
@@ -76,9 +93,25 @@ A switch can have [icons](?path=/docs/icon-gallery--page) after his text.
     </Story>
 </Preview>
 
+### Icon with tooltip
+
+A switch can have an [icon](?path=/docs/icon-gallery--page) with a [tooltip](?path=/docs/tooltip--default-story) after its label.
+
+<Preview>
+    <Story name="tooltip">
+        <Switch>
+            <Text>Pressurization</Text>
+            <TooltipTrigger slot="icon">
+                <LightbulbIcon />
+                <Tooltip>Earth is a small town with many neighborhoods in a very big universe.</Tooltip>
+            </TooltipTrigger>
+        </Switch>
+    </Story>
+</Preview>
+
 ### Counter
 
-A switch can have a [counter](?path=/docs/counter--default-story) after his text.
+A switch can have a [counter](?path=/docs/counter--default-story) after its text.
 
 <Preview>
     <Story name="counter">
@@ -91,7 +124,7 @@ A switch can have a [counter](?path=/docs/counter--default-story) after his text
 
 ### Size
 
-A switch can vary in size.
+A Switch can be used in small version to accommodate smaller spaces, such as a column row. When used in small format, the switch should not contain an icon.
 
 <Preview>
     <Story name="size">
@@ -104,7 +137,7 @@ A switch can vary in size.
 
 ### Reverse
 
-A checkbox checkmark can be to the left or to the right of his label.
+A switch toggle can be positioned to the left or to the right of its label.
 
 <Preview>
     <Story name="reverse">

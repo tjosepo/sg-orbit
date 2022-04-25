@@ -22,21 +22,28 @@ import { Tooltip, TooltipTrigger } from "@components/tooltip";
     githubPath="/packages/components/src/switch/src"
 />
 
-## Best practices
+## Guidelines
 
-- Use to trigger an immediate action such as an activation/deactivation.
+### Best practices
 
-## Accessibility
+Switches should:
+
+- Trigger an immediate action such as an activation/deactivation.
+
+### Content
 
 - Text should be short and descriptive.
-- Text should be descriptive and complete enough to be understood without relying on an icon. Using an icon to carry information will render it non-accessible.
+- Text should be self explanatory without relying on an icon. Using an icon to carry information will render it non-accessible.
+- A [tooltip](?path=/docs/tooltip--default-story) can be used to provide contextual help.
+
+### Accessibility
+
 - Do not change the label based on the state of the switch. The label should represent the "on/checked" state of the switch.
 
-## Related components
+### Checkbox, Radio or Switch
 
-- If the objective is to select elements from a list, the [checkbox](?path=/docs/checkbox--default-story) or the [radio button]() should be used instead.
-- To provide contextual help, use a [tooltip](?path=/docs/tooltip--default-story).
-- To trigger an action, use a [button](?path=/docs/button--default-story).
+- If the objective is to select multiples elements from a list, the [checkbox](?path=/docs/checkbox--default-story) should be used instead.
+- If the objective is to select one value out of a set of elements the [radio](?path=/docs/radio--default-story) should be used instead.
 
 ## Usage
 
@@ -62,7 +69,7 @@ A switch can be checked.
 
 ### No label
 
-A switch can be rendered without a label. When rendered without a label a title should be close to the switch making it clear what happens when the toggle is turned on and off.
+A switch can technically be rendered without a label. When rendered without a label a title should be adjacent to the switch making it clear what happens when the toggle is turned on and off.
 
 <Preview>
     <Story name="no label">
@@ -124,7 +131,7 @@ A switch can have a [counter](?path=/docs/counter--default-story) after its text
 
 ### Size
 
-A Switch can be used in small version to accommodate smaller spaces, such as a column row. When used in small format, the switch should not contain an icon.
+A Switch can be used in a small version to accommodate smaller spaces, such as a column row. When used in small format, the switch should not contain an icon.
 
 <Preview>
     <Story name="size">
@@ -175,4 +182,3 @@ A switch can handle `checked` state in controlled mode.
 />
 
 <ArgsTable of={InnerSwitch} sort="alpha"/>
-

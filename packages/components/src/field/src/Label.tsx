@@ -10,11 +10,25 @@ export interface InnerLabelProps extends InternalProps, StyledComponentProps<typ
      * React children.
      */
     children: ReactNode;
+    /**
+     * Whether the field show a required or optional indicator.
+     */
+    necessityIndicator?: "required" | "optional";
 }
 
-function RequiredIndicator() {
+function NecessityIndicator(props) {
+    const { indicator } = props;
+
+    let indicatorSuffix = "";
+
+    if (indicator === "required") {
+        indicatorSuffix = "*";
+    } else if (indicator === "optional") {
+        indicatorSuffix = "(optional)";
+    }
+
     return (
-        <span aria-hidden="true" className="o-ui-field-label-required">*</span>
+        <span aria-hidden="true" className="o-ui-field-label-required">{indicatorSuffix}</span>
     );
 }
 
@@ -25,6 +39,7 @@ export function InnerLabel(props: InnerLabelProps) {
         as = DefaultElement,
         children,
         forwardedRef,
+        necessityIndicator,
         ...rest
     } = mergeProps(
         props,
@@ -38,12 +53,14 @@ export function InnerLabel(props: InnerLabelProps) {
                 {
                     as,
                     className: "o-ui-field-label",
+                    necessityIndicator,
                     ref: forwardedRef,
                     size: "md" as const
                 }
             )}
         >
             {children}
+            {necessityIndicator && <NecessityIndicator indicator={necessityIndicator} />}
         </Text>
     );
 }

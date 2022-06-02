@@ -97,6 +97,27 @@ stories()
             </Div>
         </Stack>
     )
+    .add("required", () =>
+        <Field required>
+            <Label>Where to?</Label>
+            <TextInput />
+            <HelpMessage>Must be a planet in earth solar system.</HelpMessage>
+        </Field>
+    )
+    .add("necessity indicator", () =>
+        <Stack gap={10}>
+            <Field required>
+                <Label necessityIndicator="required">Where to?</Label>
+                <TextInput />
+                <HelpMessage>Must be a planet in earth solar system.</HelpMessage>
+            </Field>
+            <Field required>
+                <Label necessityIndicator="optional">Where to?</Label>
+                <TextInput />
+                <HelpMessage>Must be a planet in earth solar system.</HelpMessage>
+            </Field>
+        </Stack>
+    )
     .add("states", () =>
         <Field disabled>
             <Label>Where to?</Label>

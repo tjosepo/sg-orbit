@@ -1,7 +1,7 @@
 import { ArgsTable, Meta, Story } from "@storybook/addon-docs";
 import { Checkbox, CheckboxGroup } from "@components/checkbox";
 import { ComponentInfo, Preview, Tagline } from "@stories/components";
-import { Field, GroupField, HelpMessage, InnerErrorMessage, InnerField, InnerGroupField, InnerHelpMessage, InnerLabel, InnerValidMessage, Label } from "@components/field";
+import { Field, Form, GroupField, HelpMessage, InnerErrorMessage, InnerField, InnerGroupField, InnerHelpMessage, InnerLabel, InnerValidMessage, Label } from "@components/field";
 import { Inline } from "@components/layout";
 import { TextInput } from "@components/text-input";
 
@@ -74,7 +74,7 @@ When the input is a *group*, use a `GroupField` instead of a `Field`.
 
 ### Required
 
-A field can have a required state. This will add the appropriate aria-required on the main field element(input/select). You are responsible of validating the input as well as adding a required indicator if necessary. _Indicating optional fields is ju_
+A field can have a required state. This will add the appropriate aria-required on the main field element(input/select). You are responsible of validating the input as well as adding a required indicator if necessary.
 
 <Preview>
     <Story name="required">
@@ -83,6 +83,26 @@ A field can have a required state. This will add the appropriate aria-required o
             <TextInput placeholder="999-999-999" />
             <HelpMessage>Your space id is a 9-digit number available at the top right corner of your membership card.</HelpMessage>
         </Field>
+    </Story>
+</Preview>
+
+### Necessity indicator
+
+A field can have a necessity indicator as a suffix on the label.
+
+<Preview>
+    <Story name="necessity indicator">
+        <Form>
+            <Field required>
+                <Label necessityIndicator="required">Space ID</Label>
+                <TextInput placeholder="999-999-999" />
+                <HelpMessage>Your space id is a 9-digit number available at the top right corner of your membership card.</HelpMessage>
+            </Field>
+            <Field required>
+                <Label necessityIndicator="optional">Suit color</Label>
+                <TextInput placeholder="Red" />
+            </Field>
+        </Form>>
     </Story>
 </Preview>
 

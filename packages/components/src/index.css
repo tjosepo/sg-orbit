@@ -100,6 +100,7 @@ Sadly, we encountered CSS ordering issues when the components are bundled in our
 @import "./popover/index.css";
 @import "./radio/index.css";
 @import "./select/index.css";
+@import "./stepper/index.css";
 @import "./switch/index.css";
 @import "./tabs/index.css";
 @import "./tag/index.css";

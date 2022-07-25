@@ -1,0 +1,77 @@
+import { ArgsTable, Meta, Story } from "@storybook/addon-docs";
+import { ComponentInfo, Preview } from "@stories/components";
+import { Stepper, InnerStepper } from "@components/stepper";
+import { Inline } from "@components/layout";
+
+<Meta
+    title="Components/Stepper"
+    id="stepper"
+/>
+
+# Stepper
+
+<ComponentInfo
+    usage={"import { Stepper } from \"@sharegate/orbit-ui\";"}
+    githubPath="/packages/components/src/stepper/src"
+/>
+
+## Usage
+
+### Default
+
+Steppers display progress through a sequence of logical and numbered steps. They may also be used for navigation.
+
+<Preview>
+    <Story name="default">
+        <Stepper current={2}>
+            <Step />
+            <Step />
+            <Step />
+        </Stepper>
+    </Story>
+</Preview>
+
+### Labels
+
+Steppers can have labels.
+
+<Preview>
+    <Story name="label">
+        <Stepper current={2}>
+            <Step>Shipping</Step>
+            <Step>Payment</Step>
+            <Step>Confirmation</Step>
+        </Stepper>
+    </Story>
+</Preview>
+
+### Non-linear stepper
+
+Non-linear steppers allow the user to enter a multi-step flow at any point.
+
+export const NonLinear = () => {
+    const [current, setCurrent] = useState(0);
+    return <Stepper current={current}>
+        <Step onClick={() => setCurrent(1)} />
+        <Step onClick={() => setCurrent(2)} />
+        <Step onClick={() => setCurrent(3)} />
+    </Stepper>
+}
+
+<Preview>
+    <Story name="non-linear">
+        {NonLinear.bind({})}
+    </Story>
+</Preview>
+
+## API
+
+### Stepper
+
+<ComponentInfo
+    usage={"import { Stepper } from \"@sharegate/orbit-ui\";"}
+    inherits={[InnerStepper.defaultElement, "styled-component"]}
+    compact
+/>
+
+<ArgsTable of={InnerStepper} sort="alpha" />

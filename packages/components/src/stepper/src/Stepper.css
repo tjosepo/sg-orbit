@@ -1,0 +1,18 @@
+.o-ui-stepper {
+    display: flex;
+}
+
+.o-ui-step-root {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.o-ui-step-connector-root {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 16px);
+    right: calc(-50% + 16px);
+}

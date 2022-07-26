@@ -18,22 +18,34 @@ export interface InnerStepperProps extends InternalProps, StyledComponentProps<t
 
 export function InnerStepper(props: InnerStepperProps) {
     const {
-        current = 0,
+        as = DefaultElement,
+        children = [<Step />, <Step />],
         connector = <StepConnector />,
-        children = [<Step key="1" />, <Step key="2" />],
+        current = 0,
+        forwardedRef,
         ...rest
     } = props;
 
     const length = children.length;
 
-    return <Box {...mergeProps({ className: "o-ui-stepper" }, rest )}>
+    return <Box
+        {...mergeProps(
+            rest,
+            {
+                as,
+                className: "o-ui-stepper",
+                ref: forwardedRef
+            }
+        )}
+    >
         {children.map((step, i) => (
-            <Box className={cssModule(
-                "o-ui-step-root",
-                i + 1 < current && "completed",
-                i + 1 > current && "inactive"
-            )}
-            key={i}
+            <Box
+                className={cssModule(
+                    "o-ui-step-root",
+                    i + 1 < current && "completed",
+                    i + 1 > current && "inactive"
+                )}
+                key={i}
             >
                 {step}
                 {(i + 1) < length && (

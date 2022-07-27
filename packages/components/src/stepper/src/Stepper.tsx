@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef, ReactNode } from "react";
 import { cssModule, InternalProps, mergeProps, OmitInternalProps, StyledComponentProps } from "../../shared";
 
 import { Box } from "../../box";
-import { isItem, useCollection } from "@components/collection";
+import { isItem, useCollection, useOnlyCollectionItems } from "@components/collection";
 
 const DefaultElement = "div";
 
@@ -20,7 +20,7 @@ export function InnerStepper(props: InnerStepperProps) {
         ...rest
     } = props;
 
-    const steps = useCollection(children).filter(isItem);
+    const steps = useOnlyCollectionItems(useCollection(children));
 
     const selectedIndex = steps.findIndex(step => step.key.toString() === selectedKey.toString());
 

@@ -1,18 +1,61 @@
 .o-ui-stepper {
     display: flex;
+    align-items: flex-start;
 }
 
-.o-ui-step-root {
+.o-ui-step {
     position: relative;
     width: 100%;
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: var(--o-ui-fs-3);
+    line-height: var(--o-ui-lh-5);
+    padding: 0 1rem;
 }
 
-.o-ui-step-connector-root {
+.o-ui-step-dot {
+    margin: 0.375rem;
+    width: var(--o-ui-sz-3);
+    height: var(--o-ui-sz-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--o-ui-br-circular);
+    border: 2px solid var(--o-ui-bg-alias-accent);
+    transition: border var(--o-ui-easing-duration-1) var(--o-ui-easing-productive);
+}
+
+.o-ui-step-completed .o-ui-step-dot,
+.o-ui-step-inactive .o-ui-step-dot {
+    border-color: transparent;
+}
+
+.o-ui-step-dot::before {
+    content: "";
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: var(--o-ui-br-circular);
+    background-color: var(--o-ui-bg-alias-basic-transparent-hover);
+}
+
+.o-ui-step-completed .o-ui-step-dot::before {
+    background-color: var(--o-ui-bg-alias-accent);
+}
+
+.o-ui-step-connector {
     position: absolute;
-    top: 0;
-    left: calc(50% + 16px);
-    right: calc(-50% + 16px);
+    top: var(--o-ui-fs-4);
+    left: calc(50% + var(--o-ui-fs-4));
+    right: calc(-50% + var(--o-ui-fs-4));
+    transform: translateY(-50%);
+    height: 2px;
+    background-color: var(--o-ui-bg-alias-basic-transparent-hover);
+}
+
+.o-ui-step-connector-completed {
+    background-color: var(--o-ui-bg-alias-accent);
 }

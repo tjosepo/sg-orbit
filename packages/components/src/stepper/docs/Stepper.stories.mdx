@@ -1,6 +1,7 @@
 import { ArgsTable, Meta, Story } from "@storybook/addon-docs";
 import { ComponentInfo, Preview } from "@stories/components";
 import { Stepper, InnerStepper } from "@components/stepper";
+import { Item } from "@components/collection";
 import { Inline } from "@components/layout";
 
 <Meta
@@ -23,10 +24,10 @@ Steppers display progress through a sequence of logical and numbered steps. They
 
 <Preview>
     <Story name="default">
-        <Stepper current={2}>
-            <Step />
-            <Step />
-            <Step />
+        <Stepper selectedKey="2">
+            <Item key="1" />
+            <Item key="2" />
+            <Item key="3" />
         </Stepper>
     </Story>
 </Preview>
@@ -37,30 +38,11 @@ Steppers can have labels.
 
 <Preview>
     <Story name="label">
-        <Stepper current={2}>
-            <Step>Shipping</Step>
-            <Step>Payment</Step>
-            <Step>Confirmation</Step>
+        <Stepper selectedKey="Payment">
+            <Item key="Shipping">Shipping</Item>
+            <Item key="Payment">Payment</Item>
+            <Item key="Confirmation">Confirmation</Item>
         </Stepper>
-    </Story>
-</Preview>
-
-### Non-linear stepper
-
-Non-linear steppers allow the user to enter a multi-step flow at any point.
-
-export const NonLinear = () => {
-    const [current, setCurrent] = useState(0);
-    return <Stepper current={current}>
-        <Step onClick={() => setCurrent(1)} />
-        <Step onClick={() => setCurrent(2)} />
-        <Step onClick={() => setCurrent(3)} />
-    </Stepper>
-}
-
-<Preview>
-    <Story name="non-linear">
-        {NonLinear.bind({})}
     </Story>
 </Preview>
 

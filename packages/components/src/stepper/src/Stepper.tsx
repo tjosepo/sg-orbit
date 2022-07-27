@@ -1,32 +1,34 @@
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps, forwardRef, Key, ReactNode } from "react";
 import { cssModule, InternalProps, mergeProps, OmitInternalProps, StyledComponentProps } from "../../shared";
 
 import { Box } from "../../box";
-import { Step } from "./Step";
-import { StepConnector } from "./StepConnector";
+import { getItemKeyAndChildren } from "./itemUtil";
 
 const DefaultElement = "div";
 
 export interface InnerStepperProps extends InternalProps, StyledComponentProps<typeof DefaultElement> {
-    children?: typeof Step[];
-    connector?: React.ReactNode;
-    /**
-     * The current step
-     */
-    current: number;
+    children: ReactNode;
+    selectedKey?: Key;
 }
 
 export function InnerStepper(props: InnerStepperProps) {
     const {
         as = DefaultElement,
-        children = [<Step />, <Step />],
-        connector = <StepConnector />,
-        current = 0,
+        children,
+        selectedKey,
         forwardedRef,
         ...rest
     } = props;
 
-    const length = children.length;
+    const steps = getItemKeyAndChildren(children);
+
+    let current = -1;
+    for (let i = 0; i < steps.length; i++) {
+        if (steps[i].key === selectedKey.toString()) {
+            current = i;
+            break;
+        }
+    }
 
     return <Box
         {...mergeProps(
@@ -38,23 +40,23 @@ export function InnerStepper(props: InnerStepperProps) {
             }
         )}
     >
-        {children.map((step, i) => (
+        {steps.map((step, i) => (
             <Box
                 className={cssModule(
-                    "o-ui-step-root",
-                    i + 1 < current && "completed",
-                    i + 1 > current && "inactive"
+                    "o-ui-step",
+                    i < current && "completed",
+                    i > current && "inactive"
                 )}
-                key={i}
+                key={step.key}
             >
-                {step}
-                {(i + 1) < length && (
+                <Box className="o-ui-step-dot" />
+                {step.children}
+                {(i + 1) < steps.length && (
                     <Box className={cssModule(
-                        "o-ui-step-connector-root",
-                        i + 1 < current && "completed"
+                        "o-ui-step-connector",
+                        i < current && "completed"
                     )}
                     >
-                        {connector}
                     </Box>
                 )}
             </Box>

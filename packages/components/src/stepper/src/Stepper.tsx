@@ -1,14 +1,14 @@
-import { ComponentProps, forwardRef, Key, ReactNode } from "react";
+import { ComponentProps, forwardRef, ReactNode } from "react";
 import { cssModule, InternalProps, mergeProps, OmitInternalProps, StyledComponentProps } from "../../shared";
 
 import { Box } from "../../box";
-import { getItemKeyAndChildren } from "./itemUtil";
+import { isItem, useCollection } from "@components/collection";
 
 const DefaultElement = "div";
 
 export interface InnerStepperProps extends InternalProps, StyledComponentProps<typeof DefaultElement> {
     children: ReactNode;
-    selectedKey?: Key;
+    selectedKey?: string;
 }
 
 export function InnerStepper(props: InnerStepperProps) {
@@ -20,15 +20,9 @@ export function InnerStepper(props: InnerStepperProps) {
         ...rest
     } = props;
 
-    const steps = getItemKeyAndChildren(children);
+    const steps = useCollection(children).filter(isItem);
 
-    let current = -1;
-    for (let i = 0; i < steps.length; i++) {
-        if (steps[i].key === selectedKey.toString()) {
-            current = i;
-            break;
-        }
-    }
+    const selectedIndex = steps.findIndex(step => step.key.toString() === selectedKey.toString());
 
     return <Box
         {...mergeProps(
@@ -44,17 +38,17 @@ export function InnerStepper(props: InnerStepperProps) {
             <Box
                 className={cssModule(
                     "o-ui-step",
-                    i < current && "completed",
-                    i > current && "inactive"
+                    i < selectedIndex && "completed",
+                    i > selectedIndex && "inactive"
                 )}
                 key={step.key}
             >
                 <Box className="o-ui-step-dot" />
-                {step.children}
+                {step.content}
                 {(i + 1) < steps.length && (
                     <Box className={cssModule(
                         "o-ui-step-connector",
-                        i < current && "completed"
+                        i < selectedIndex && "completed"
                     )}
                     >
                     </Box>

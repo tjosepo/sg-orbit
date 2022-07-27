@@ -14,7 +14,7 @@
     text-align: center;
     font-size: var(--o-ui-fs-3);
     line-height: var(--o-ui-lh-5);
-    padding: 0 1rem;
+    padding: 0 var(--o-ui-sp-4);
 }
 
 .o-ui-step-dot {
